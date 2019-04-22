@@ -1,25 +1,152 @@
-<section class="bounceInRight">
-  <div class="box1">
-    <h2>Address Details</h2>
-    <hr>
-    <form>
-      <div>
-        <input type="text" placeholder="street/house no">
-        <select>
-          <option value="">Country</option>
-        </select>
-        <select>
-          <option value="">State</option>
-        </select>
-        <select>
-          <option value="">City</option>
-        </select>
-        <input type="text" placeholder="pin code">
-        <div>
-          <button class="previous">&laquo; Previous</button>
-          <button class="next">Next &raquo;</button>
+<div class="container">
+  <div class="box">
+    <div class="box-title">
+      <h2>Address Details</h2>
+    </div>
+    <div class="box-body">
+
+      <form [formGroup]="addressForm">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="text-center title">
+              <h4>Current Address</h4>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">Street/ House No./ Village
+                </label>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control" formControlName="hometown">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">Country
+                </label>
+                <div class="col-lg-6">
+                  <select id="country" formControlName="country" class="form-control" (change)="getStates()">
+                    <option value="" disabled>--select country--</option>
+                    <option *ngFor="let country of countries" value="{{country.id}}|{{country.name}}">
+                      {{country.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">State
+                </label>
+                <div class="col-lg-6">
+                  <select id="country" formControlName="state" class="form-control" (change)="getCities()">
+                    <option value="" selected>--select state--</option>
+                    <option *ngFor="let state of states" value="{{state.id}}|{{state.name}}">
+                      {{state.name}}</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">City
+                </label>
+                <div class="col-lg-6">
+                  <select id="country" formControlName="city" class="form-control">
+                    <option value="">--select city--</option>
+                    <option *ngFor="let city of cities" value="{{city.id}}|{{city.name}}">
+                      {{city.name}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">Pin Code
+                </label>
+                <div class="col-lg-6">
+                  <input type="text" formControlName="pincode" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 vl"></div>
+          <div class="col-lg-5">
+            <div class="text-center title">
+              <h4>Permanent Address</h4>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">Street/ House No./ Village
+                </label>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control" formControlName="hometown">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">Country
+                </label>
+                <div class="col-lg-6">
+                  <select id="country" formControlName="country" class="form-control" (change)="getStates()">
+                    <option value="" disabled>--select country--</option>
+                    <option *ngFor="let country of countries" value="{{country.id}}|{{country.name}}">
+                      {{country.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">State
+                </label>
+                <div class="col-lg-6">
+                  <select id="country" formControlName="state" class="form-control" (change)="getCities()">
+                    <option value="" selected>--select state--</option>
+                    <option *ngFor="let state of states" value="{{state.id}}|{{state.name}}">
+                      {{state.name}}</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">City
+                </label>
+                <div class="col-lg-6">
+                  <select id="country" formControlName="city" class="form-control">
+                    <option value="">--select city--</option>
+                    <option *ngFor="let city of cities" value="{{city.id}}|{{city.name}}">
+                      {{city.name}}</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-lg-4">Pin Code
+                </label>
+                <div class="col-lg-6">
+                  <input type="text" formControlName="pincode" class="form-control">
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-      </div>
-    </form>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-primary">Previous</button>
+            <button type="submit" class="btn btn-success pull-right">Next</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
-</section>
+</div>
