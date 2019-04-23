@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { EMAIL_REGEX, Errors } from '../../common/constants';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Errors, PageTitles } from '../../common/constants';
+import { PersonaalDetailsModel } from 'src/app/models/personal-details.model';
 @Component({
   selector: 'app-personal-details',
   templateUrl: './personal-details.component.html',
@@ -9,6 +10,8 @@ import { EMAIL_REGEX, Errors } from '../../common/constants';
 export class PersonalDetailsComponent implements OnInit {
 
   personalDetails: FormGroup;
+  submitted = false;
+  pageTitle = PageTitles;
   public fields: any[] = [
     {
       type: 'text',
@@ -32,7 +35,7 @@ export class PersonalDetailsComponent implements OnInit {
       type: 'email',
       name: 'email',
       label: 'Email',
-      error: Errors.InvalidEmail
+      error: Errors.RequiredField
 
     },
     {
@@ -57,7 +60,7 @@ export class PersonalDetailsComponent implements OnInit {
         name: ['', Validators.required],
         fatherName: ['', Validators.required],
         motherName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+        email: ['', [Validators.required, Validators.email]],
         dob: ['', Validators.required],
         gender: ['', Validators.required]
       }
@@ -67,7 +70,11 @@ export class PersonalDetailsComponent implements OnInit {
     return this.personalDetails.controls;
   }
 
-  onClick() {
+  onSubmit() {
+    this.submitted = true;
+    if (this.personalDetails.invalid) {
+      return;
+    }
     console.log(this.personalDetails.value);
     console.log(this.personalDetails);
 

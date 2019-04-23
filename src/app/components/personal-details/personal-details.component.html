@@ -1,47 +1,49 @@
 <div class="container">
   <div class="box">
     <div class="box-title">
-      <h2>Personal Details</h2>
+      <h2>{{pageTitle.personalDetail.Title}}</h2>
     </div>
     <div class="box-body">
-      <form [formGroup]='personalDetails' (ngSubmit)='onClick()'>
+      <form [formGroup]='personalDetails' (ngSubmit)='onSubmit()'>
         <div *ngFor='let field of fields'>
-              <div class='form-group' *ngIf="field.name!=='gender'">
-                <div class="row">
-                  <label class="col-lg-2 col-sm-3 offset-lg-2">{{field.label}}
-                  </label>
-                  <div class="col-lg-5 col-sm-4">
-                     <input class="form-control " [formControlName]="field.name" [type]='field.type' >
-                  </div>
+          <div class='form-group' *ngIf="field.name!=='gender'">
+            <div class="row">
+              <label class="col-lg-2 col-sm-3 offset-lg-2">{{field.label}}
+              </label>
+              <div class="col-lg-5 col-sm-4">
+                <input class="form-control " [formControlName]="field.name" [type]='field.type'>
+              </div>
+            </div>
+            <div class='error col-sm-5 offset-lg-4' *ngIf='submitted && personalDetails.get(field.name).invalid'>
+              <p *ngIf="personalDetails.get(field.name).errors.required">{{field.error}}</p>
+              <p *ngIf="personalDetails.get(field.name).errors.email">Invalid email!</p>
+            </div>
+          </div>
+
+          <div class='form-group' *ngIf="field.name==='gender'">
+            <div class="row">
+              <label class='col-lg-2 col-sm-3 offset-lg-2'>{{field.label}}
+              </label>
+              <div class="col-lg-5 col-sm-4">
+                <div class="mr-4 d-inline">
+                  <input type="radio" name="gender" value="male"> Male
                 </div>
-                <div class='error col-sm-5 offset-lg-4' *ngIf='personalDetails.get(field.name).invalid && (personalDetails.get(field.name).touched || personalDetails.get(field.name).dirty)'>
-                    {{field.error}}
+                <div class="d-inline">
+                  <input type="radio" name="gender" value="female"> Female
                 </div>
               </div>
-              
-              <div class='form-group' *ngIf="field.name==='gender'">
-                  <div class="row">
-                      <label class='col-lg-2 col-sm-3 offset-lg-2'>{{field.label}}
-                        </label>
-                        <div class="col-lg-5 col-sm-4">
-                          <div class="mr-4 d-inline">
-                            <input type="radio" name="gender" value="male"> Male
-                          </div>
-                          <div class="d-inline">
-                              <input type="radio" name="gender" value="female"> Female
-                          </div>
-                        </div>
-                  </div>
-                  <div class='error col-sm-5 offset-lg-4' *ngIf='personalDetails.get(field.name).invalid && personalDetails.get(field.name).touched'>
-                      {{field.error}}
-                  </div>
-              </div>
+            </div>
+            <div class='error col-sm-5 offset-lg-4'
+              *ngIf='personalDetails.get(field.name).invalid && personalDetails.get(field.name).touched'>
+              {{field.error}}
+            </div>
+          </div>
         </div>
         <div class="row text-right">
           <div class="col-md-12">
-              <button type="submit" class="btn btn-success btn-lg" >Next</button>
+            <button type="submit" class="btn btn-success btn-lg">Next</button>
           </div>
-      </div>
+        </div>
       </form>
     </div>
   </div>
