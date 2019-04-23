@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { EMAIL_REGEX, Errors } from '../../common/constants';
 @Component({
   selector: 'app-personal-details',
   templateUrl: './personal-details.component.html',
@@ -9,35 +9,43 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class PersonalDetailsComponent implements OnInit {
 
   personalDetails: FormGroup;
-  keys = [];
-
   public fields: any[] = [
     {
       type: 'text',
       name: 'name',
       label: 'Name',
+      error: Errors.RequiredField
     },
     {
       type: 'text',
       name: 'fatherName',
-      label: 'Father Name'
+      label: 'Father Name',
+      error: Errors.RequiredField
     },
     {
       type: 'text',
       name: 'motherName',
-      label: 'Mother Name'
+      label: 'Mother Name',
+      error: Errors.RequiredField
+    },
+    {
+      type: 'email',
+      name: 'email',
+      label: 'Email',
+      error: Errors.InvalidEmail
+
     },
     {
       type: 'date',
       name: 'dob',
-      label: 'DOB'
+      label: 'DOB',
+      error: Errors.RequiredField
     },
     {
       type: 'radio',
       name: 'gender',
-      name1: 'male',
-      name2: 'female',
-      label: 'Gender'
+      label: 'Gender',
+      error: Errors.RequiredField
     }
   ];
 
@@ -49,6 +57,7 @@ export class PersonalDetailsComponent implements OnInit {
         name: ['', Validators.required],
         fatherName: ['', Validators.required],
         motherName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
         dob: ['', Validators.required],
         gender: ['', Validators.required]
       }
@@ -57,8 +66,11 @@ export class PersonalDetailsComponent implements OnInit {
   get controls() {
     return this.personalDetails.controls;
   }
+
   onClick() {
     console.log(this.personalDetails.value);
+    console.log(this.personalDetails);
+
   }
 
 }
