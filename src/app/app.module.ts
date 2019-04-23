@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonalDetailsComponent } from './components/personal-details/personal-details.component';
 import { PhotoSignatureComponent } from './components/photo-signature/photo-signature.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +14,7 @@ import { PhotoSignatureComponent } from './components/photo-signature/photo-sign
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
