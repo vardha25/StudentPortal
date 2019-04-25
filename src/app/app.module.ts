@@ -8,18 +8,22 @@ import { AddressDetailsComponent } from './components/address-details/address-de
 import { HttpClientModule } from '@angular/common/http';
 import { AddressService } from './services/address.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgreementComponent } from './components/agreement/agreement.component';
+import { RecaptchaModule } from 'ng-recaptcha'
 @NgModule({
   declarations: [
     AppComponent,
     AddressDetailsComponent,
-    PersonalDetailsComponent
+    PersonalDetailsComponent,
+    AgreementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RecaptchaModule
   ],
   providers: [AddressService],
   bootstrap: [AppComponent]
