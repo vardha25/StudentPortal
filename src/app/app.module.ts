@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonalDetailsComponent } from './components/personal-details/personal-details.component';
 import { PhotoSignatureComponent } from './components/photo-signature/photo-signature.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
     PersonalDetailsComponent,
-    PhotoSignatureComponent
+    PhotoSignatureComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
