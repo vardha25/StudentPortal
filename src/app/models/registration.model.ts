@@ -21,22 +21,10 @@ interface PersonalDetail {
     gender: string
 }
 
-export class AddressModel {
+export class RegistrationModel {
     personalDetail: PersonalDetail;
     currentAddress: CurrentAddress;
     permanentAddress: PermanetAddress;
 
-    constructor(currentAddress: CurrentAddress, permanentAddress: PermanetAddress) {
-        this.currentAddress = currentAddress;
-        this.permanentAddress = permanentAddress;
-    }
-    set personalDetailData(obj) {
-        this.personalDetail = obj;
-    }
-    set currentAddressData(obj) {
-        this.currentAddress = obj;
-    }
-    set permanentAddressData(obj) {
-        this.permanentAddress = obj
-    }
+    constructor() { }
 }

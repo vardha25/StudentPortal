@@ -10,6 +10,7 @@ import { AddressService } from './services/address.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgreementComponent } from './components/agreement/agreement.component';
 import { RecaptchaModule } from 'ng-recaptcha'
+import { RegistrationService } from './services/registration.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,7 @@ import { RecaptchaModule } from 'ng-recaptcha'
     ReactiveFormsModule,
     RecaptchaModule
   ],
-  providers: [AddressService],
+  providers: [AddressService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

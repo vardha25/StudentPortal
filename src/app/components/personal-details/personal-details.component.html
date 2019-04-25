@@ -25,12 +25,10 @@
               <label class='col-lg-2 col-sm-3 offset-lg-2'>{{field.label}}
               </label>
               <div class="col-lg-5 col-sm-4">
-                <div class="mr-4 d-inline">
-                  <input type="radio" name="gender" value="male"> Male
+                <div class="mr-4 d-inline" *ngFor="let value of field.value">
+                  <input type="radio" name="gender" value="{{value}}" [formControlName]="field.name" checked> {{value}}
                 </div>
-                <div class="d-inline">
-                  <input type="radio" name="gender" value="female"> Female
-                </div>
+
               </div>
             </div>
             <div class='error col-sm-5 offset-lg-4'
@@ -41,7 +39,7 @@
         </div>
         <div class="row text-right">
           <div class="col-md-12">
-            <button type="submit" class="btn btn-success btn-lg">Next</button>
+            <button type="submit" class="btn btn-success">Next</button>
           </div>
         </div>
       </form>

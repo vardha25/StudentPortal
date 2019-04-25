@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Errors, PageTitles } from '../../common/constants';
 import { PersonaalDetailsModel } from 'src/app/models/personal-details.model';
+import { RegistrationModel } from 'src/app/models/registration.model';
+import { RegistrationService } from 'src/app/services/registration.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-personal-details',
   templateUrl: './personal-details.component.html',
@@ -12,6 +15,7 @@ export class PersonalDetailsComponent implements OnInit {
   personalDetails: FormGroup;
   submitted = false;
   pageTitle = PageTitles;
+  formData: {};
   public fields: any[] = [
     {
       type: 'text',
@@ -48,23 +52,29 @@ export class PersonalDetailsComponent implements OnInit {
       type: 'radio',
       name: 'gender',
       label: 'Gender',
-      error: Errors.RequiredField
+      value: ['Male', 'Female']
     }
   ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private registrationService: RegistrationService,
+    private router: Router) {
+  }
 
   ngOnInit() {
-    this.personalDetails = this.fb.group(
-      {
-        name: ['', Validators.required],
-        fatherName: ['', Validators.required],
-        motherName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        dob: ['', Validators.required],
-        gender: ['', Validators.required]
-      }
-    );
+    this.registrationService.currentData.subscribe(data => {
+      this.formData = data;
+      console.log(data);
+    })
+
+    this.personalDetails = this.fb.group({
+      name: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      dob: ['', Validators.required],
+      gender: ['']
+    });
   }
   get controls() {
     return this.personalDetails.controls;
@@ -75,9 +85,7 @@ export class PersonalDetailsComponent implements OnInit {
     if (this.personalDetails.invalid) {
       return;
     }
-    console.log(this.personalDetails.value);
-    console.log(this.personalDetails);
-
+    this.registrationService.setPersonalDetailData(this.personalDetails.value);
+    this.router.navigate(['address-details']);
   }
-
 }

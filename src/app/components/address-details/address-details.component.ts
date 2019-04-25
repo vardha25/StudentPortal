@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddressService } from 'src/app/services/address.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressModel } from 'src/app/models/address.model';
+import { RegistrationModel } from 'src/app/models/registration.model';
 import { Errors } from 'src/app/common/constants';
+import { RegistrationService } from 'src/app/services/registration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-address-details',
@@ -17,9 +19,19 @@ export class AddressDetailsComponent implements OnInit {
   validationMessages = Errors;
   formTitles = ['Current Address', 'Permanent Address'];
   submitted = false;
-  constructor(private addressService: AddressService, private formBuilder: FormBuilder) { }
+  formData;
+  constructor(
+    private addressService: AddressService,
+    private formBuilder: FormBuilder,
+    private registrationService: RegistrationService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.registrationService.currentData.subscribe(data => {
+      this.formData = data;
+    })
+
     for (let index = 0; index < 2; index++) {
       this.addressForm[index] = this.formBuilder.group({
         hometown: ['', Validators.required],
@@ -75,7 +87,13 @@ export class AddressDetailsComponent implements OnInit {
     if (this.addressForm[0].invalid || this.addressForm[1].invalid) {
       return;
     }
-    const finalAddress = new AddressModel(this.addressForm[0].value, this.addressForm[1].value);
+    // const finalAddress = new RegistrationModel(this.addressForm[0].value, this.addressForm[1].value);
     //TODO: API integration
+  }
+  previous() {
+    this.registrationService.setCurrentAddressData(this.addressForm[0]);
+    this.registrationService.setPermanentAddressData(this.addressForm[1]);
+
+    this.router.navigate(['personal-details']);
   }
 }
