@@ -31,7 +31,14 @@
         <div class="row offset-lg-1">
             <input formControlName="signature" type='file' (change)="onSelectSign($event)" accept="image/*">
         </div>
-
+        <div class="instructions" style= "margin-left:60px;"> 
+            <ul>
+                <p><b>Guidelines for uploading photo signature</b></p>
+              <li class='text-muted'>Size of photograph should be between 40kb - 300kb</li>
+              <li class="text-muted">Size of signature should be between 10kb - 40kb</li>
+            </ul>
+        </div>
+        
         <div class="row ">
             <div class="col-md-6 offset-md-1 md-4">
                 <button type="button" class="btn btn-primary btn-lg">Previous</button>

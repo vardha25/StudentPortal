@@ -40,7 +40,7 @@ export class PhotoSignatureComponent implements OnInit {
         }
         return;
       }
-      console.log('size', sizeInKb);
+      const selectedPhoto = new Image(event.target.result, file);
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = ( event ) => {
         this.obj = event.target;
@@ -57,15 +57,14 @@ onSelectSign(event) {
     const file = event.target.files[0];
     const sizeInKb = file.size / 1000;
     if (sizeInKb < 10 || sizeInKb > 40) {
-      if(sizeInKb < 10){
+      if(sizeInKb < 10) {
         this.errorMessage1 = Errors.SmallFile;
       } else {
         this.errorMessage1 = Errors.LargeFile;
       }
       return;
     }
-    const selectedFile = new Image(event.target.result, file);
-    console.log(selectedFile);
+    const selectedSign = new Image(event.target.result, file);
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = ( event ) => {
       this.obj = event.target;
