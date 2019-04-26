@@ -6,7 +6,7 @@
     <div class="box-body">
       <div class="row" style="margin-left:11%">
         <div *ngFor="let form of addressForm;let i=index" [ngClass]="{'pull-left': i===0,'pull-right':i===1}">
-          <form [formGroup]="addressForm[i]" (ngSubmit)="onSubmit()" id="form[{{i}}]">
+          <form [formGroup]="addressForm[i]" (ngSubmit)="next()" id="form[{{i}}]">
 
             <div class="col-lg-10">
               <div class="text-center title">
@@ -110,7 +110,7 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <button class="btn btn-primary" [routerLink]="['/personal-details']" style="float: left;">Previous</button>
+          <button class="btn btn-primary" style="float: left;" (click)="previous()">Previous</button>
           <button type="submit" class="btn btn-success" style="float: right;" form="form[0]">Next</button>
         </div>
       </div>

@@ -16,12 +16,18 @@ export class RegistrationService {
     }
     setCurrentAddressData(obj) {
 
-        this.formData.currentAddress = obj;
+        this.formData.tempAdd = obj;
         this.messageSource.next(this.formData);
 
     }
     setPermanentAddressData(obj) {
-        this.formData.permanentAddress = obj;
+        this.formData.permanentAdd = obj;
         this.messageSource.next(this.formData);
+    }
+    setUserImage(obj) {
+        this.formData.userImage = obj;
+    }
+    setUserSignature(obj) {
+        this.formData.userSignature = obj;
     }
 }

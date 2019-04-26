@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageTitles, Errors } from '../../common/constants';
+import { Router } from '@angular/router';
 import { RegistrationService } from 'src/app/services/registration.service';
 @Component({
   selector: 'app-photo-signature',
@@ -11,24 +12,47 @@ export class PhotoSignatureComponent implements OnInit {
   photoSignature: FormGroup;
   photoUrl: string;
   signUrl: string;
-  obj;
+  obj1;
+  obj2;
   submitted = false;
   errorMessage;
   errorMessage1;
   pageTitle = PageTitles;
+  userPhoto: File;
+  userSignature: File;
   constructor(private fb: FormBuilder,
-    private registrationService: RegistrationService) { }
+    private router: Router,
+    private registrationService: RegistrationService
+  ) { }
 
   ngOnInit() {
+    console.log(this.registrationService.formData);
+
+    this.photoSignature = this.fb.group({
+      photo: [null, Validators.required],
+      signature: [null, Validators.required]
+    });
+
     this.registrationService.currentData.subscribe(data => {
       console.log(data);
-    })
+      if (data['userImage'] && data['userSignature']) {
+        this.photoUrl = data.userImage.fileName;
+        this.signUrl = data.userSignature.fileName;
+        const reader = new FileReader();
+        reader.readAsDataURL(data.userImage.image);
+        reader.onload = (event) => {
+          this.obj1 = event.target;
+          this.photoUrl = this.obj1.result;
+        };
+        const reader1 = new FileReader();
+        reader1.readAsDataURL(data.userSignature.sign);
+        reader1.onload = (event) => {
+          this.obj2 = event.target;
+          this.signUrl = this.obj2.result;
+        };
+      }
 
-    this.photoSignature = this.fb.group(
-      {
-        photo: [null, Validators.required],
-        signature: [null, Validators.required]
-      });
+    })
   }
 
   onSelectPhoto(event) {
@@ -46,13 +70,25 @@ export class PhotoSignatureComponent implements OnInit {
         }
         return;
       }
-      console.log('size', sizeInKb);
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event) => {
-        this.obj = event.target;
-        this.photoUrl = this.obj.result;
-      };
+      this.populateUserImage(event, 0);
     }
+  }
+  populateUserImage(event, flag) {
+    const reader = new FileReader();
+    let obj = event.target.files[0];
+    const selectedPhoto = new Image(event.target.result, event.target.files[0]);
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (event) => {
+      this.obj1 = event.target;
+      if (flag === 0) {
+        this.photoUrl = this.obj1.result;
+        this.userPhoto = obj;
+      }
+      else {
+        this.signUrl = this.obj1.result;
+        this.userSignature = obj;
+      }
+    };
   }
 
   onSelectSign(event) {
@@ -70,20 +106,28 @@ export class PhotoSignatureComponent implements OnInit {
         }
         return;
       }
-      const selectedFile = new Image(event.target.result, file);
-      console.log(selectedFile);
+      this.userSignature = event.target.files[0];
+      const selectedSign = new Image(event.target.result, file);
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event) => {
-        this.obj = event.target;
-        this.signUrl = this.obj.result;
+        this.obj2 = event.target;
+        this.signUrl = this.obj2.result;
       };
     }
   }
-  onSubmit() {
+  next() {
     this.submitted = true;
     if (this.photoSignature.invalid) {
       return;
     }
-    console.log(this.photoSignature);
+    this.registrationService.setUserImage({ image: this.userPhoto, fileName: this.photoSignature.value.photo });
+    this.registrationService.setUserSignature({ sign: this.userSignature, fileName: this.photoSignature.value.signature });
+    this.router.navigate(['agreement']);
+  }
+
+  previous() {
+    this.registrationService.setUserImage({ image: this.userPhoto, fileName: this.photoSignature.value.photo });
+    this.registrationService.setUserSignature({ sign: this.userSignature, fileName: this.photoSignature.value.signature });
+    this.router.navigate(['address-details']);
   }
 }

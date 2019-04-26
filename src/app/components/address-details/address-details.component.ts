@@ -20,6 +20,7 @@ export class AddressDetailsComponent implements OnInit {
   formTitles = ['Current Address', 'Permanent Address'];
   submitted = false;
   formData;
+
   constructor(
     private addressService: AddressService,
     private formBuilder: FormBuilder,
@@ -28,9 +29,7 @@ export class AddressDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.registrationService.currentData.subscribe(data => {
-      this.formData = data;
-    })
+
 
     for (let index = 0; index < 2; index++) {
       this.addressForm[index] = this.formBuilder.group({
@@ -41,12 +40,31 @@ export class AddressDetailsComponent implements OnInit {
         pincode: ['', Validators.required],
       })
     }
-
-
     this.addressService.getCountries().subscribe(result => {
       this.countries = result['countries'];
     })
+
+    this.registrationService.currentData.subscribe(data => {
+      if (data.tempAdd) {
+        this.populateAddress(data);
+      }
+    })
+
+
   }
+
+  populateAddress(data) {
+    for (let index = 0; index < 2; index++) {
+
+      let obj = (index === 0) ? data.currentAddress : data.permanentAddress;
+      this.formControls(index).hometown.setValue(obj.hometown);
+      this.formControls(index).country.setValue(obj.country);
+      this.formControls(index).state.setValue(obj.state);
+      this.formControls(index).city.setValue(obj.city);
+      this.formControls(index).pincode.setValue(obj.pincode);
+    }
+  }
+
   getStates(index) {
     let data = [];
     let values = JSON.parse(this.formControls(index).country.value);
@@ -58,8 +76,6 @@ export class AddressDetailsComponent implements OnInit {
           data.push(states[index]);
         }
       }
-      console.log(data);
-
       this.states[index] = data;
     })
   }
@@ -82,7 +98,7 @@ export class AddressDetailsComponent implements OnInit {
     return this.addressForm[index].controls;
   }
 
-  onSubmit() {
+  next() {
     this.submitted = true;
     if (this.addressForm[0].invalid || this.addressForm[1].invalid) {
       return;
@@ -91,11 +107,8 @@ export class AddressDetailsComponent implements OnInit {
     this.registrationService.setPermanentAddressData(this.addressForm[1].value);
     this.router.navigate(['photo-signature']);
   }
+
   previous() {
-    this.submitted = true;
-    if (this.addressForm[0].invalid || this.addressForm[1].invalid) {
-      return;
-    }
     this.registrationService.setCurrentAddressData(this.addressForm[0].value);
     this.registrationService.setPermanentAddressData(this.addressForm[1].value);
 

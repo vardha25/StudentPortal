@@ -21,10 +21,19 @@ interface PersonalDetail {
     gender: string
 }
 
+interface image {
+    image: File,
+    fileName: string
+}
+interface sign {
+    sign: File,
+    fileName: string
+}
 export class RegistrationModel {
     personalDetail: PersonalDetail;
-    currentAddress: CurrentAddress;
-    permanentAddress: PermanetAddress;
-
+    tempAdd: CurrentAddress;
+    permanentAdd: PermanetAddress;
+    userImage: image;
+    userSignature: sign;
     constructor() { }
 }

@@ -7,6 +7,7 @@ import { PersonalDetailsComponent } from './components/personal-details/personal
 import { AddressDetailsComponent } from './components/address-details/address-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddressService } from './services/address.service';
+import { HttpService } from './services/http.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgreementComponent } from './components/agreement/agreement.component';
 import { RecaptchaModule } from 'ng-recaptcha'
@@ -28,7 +29,7 @@ import { PhotoSignatureComponent } from './components/photo-signature/photo-sign
     ReactiveFormsModule,
     RecaptchaModule
   ],
-  providers: [AddressService, RegistrationService],
+  providers: [AddressService, RegistrationService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
