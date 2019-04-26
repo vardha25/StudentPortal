@@ -62,11 +62,6 @@ export class PersonalDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registrationService.currentData.subscribe(data => {
-      this.formData = data;
-      console.log(data);
-    })
-
     this.personalDetails = this.fb.group({
       name: ['', Validators.required],
       fatherName: ['', Validators.required],
@@ -75,6 +70,11 @@ export class PersonalDetailsComponent implements OnInit {
       dob: ['', Validators.required],
       gender: ['']
     });
+
+    this.registrationService.currentData.subscribe(data => {
+      this.formData = data;
+      console.log(data);
+    })
   }
   get controls() {
     return this.personalDetails.controls;

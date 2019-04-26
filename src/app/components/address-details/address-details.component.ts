@@ -87,12 +87,17 @@ export class AddressDetailsComponent implements OnInit {
     if (this.addressForm[0].invalid || this.addressForm[1].invalid) {
       return;
     }
-    // const finalAddress = new RegistrationModel(this.addressForm[0].value, this.addressForm[1].value);
-    //TODO: API integration
+    this.registrationService.setCurrentAddressData(this.addressForm[0].value);
+    this.registrationService.setPermanentAddressData(this.addressForm[1].value);
+    this.router.navigate(['photo-signature']);
   }
   previous() {
-    this.registrationService.setCurrentAddressData(this.addressForm[0]);
-    this.registrationService.setPermanentAddressData(this.addressForm[1]);
+    this.submitted = true;
+    if (this.addressForm[0].invalid || this.addressForm[1].invalid) {
+      return;
+    }
+    this.registrationService.setCurrentAddressData(this.addressForm[0].value);
+    this.registrationService.setPermanentAddressData(this.addressForm[1].value);
 
     this.router.navigate(['personal-details']);
   }

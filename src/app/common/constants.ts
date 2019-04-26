@@ -7,7 +7,9 @@ export const AddressAPI = {
 export const Errors = {
     InvalidEmail: 'Please enter correct email',
     RequiredField: 'This field is required',
-    PinCode: 'Must be of 6 digits!'
+    PinCode: 'Must be of 6 digits!',
+    LargeFile: 'File size is too large',
+    SmallFile: 'File size is too small'
 
 };
 export const PageTitles = {

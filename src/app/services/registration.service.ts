@@ -15,6 +15,7 @@ export class RegistrationService {
         this.messageSource.next(this.formData);
     }
     setCurrentAddressData(obj) {
+
         this.formData.currentAddress = obj;
         this.messageSource.next(this.formData);
 
