@@ -12,6 +12,12 @@ export const PageTitles = {
         Title: 'Photo Signature Details',
         Subtitle1: 'Upload Photograph',
         Subtitle2: 'Upload Signatures'
+    },
+    registrationForm: {
+        Title: 'Registration Form',
+        permanentAddressTitle: 'Permanent Address',
+        currentAddressTitle: 'Current Address' ,
+        photoSignatureTitle: 'Photo and Signatures'
     }
 };
 
