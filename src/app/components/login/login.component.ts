@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Errors } from '../../common/constants';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   login: FormGroup;
-  submitted= false;
+  submitted = false;
+  errors = Errors;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -19,9 +21,8 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    if(this.login.invalid) {
+    if (this.login.invalid) {
       return;
     }
-    console.log(this.login.value);
   }
 }
