@@ -20,4 +20,24 @@ export const PageTitles = {
         photoSignatureTitle: 'Photo and Signatures'
     }
 };
+export const Labels = {
+    personalDetails: {
+    name: 'Name',
+    fatherName: 'Father\'s Name',
+    motherName: 'Mother\'s Name',
+    email: 'Email',
+    gender: 'Gender',
+    },
+    addressDetails: {
+      city: 'City',
+      country: 'Country',
+      state: 'State',
+      pin: 'PIN Code'
+    },
+    photoSignature: {
+        image: 'Image',
+        sign: 'Signature'
+    }
+
+}
 
