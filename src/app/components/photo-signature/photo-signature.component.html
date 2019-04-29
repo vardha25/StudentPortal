@@ -1,0 +1,52 @@
+<div class='container'>
+  <div class="box">
+    <div class="box-title">
+      <h2>{{pageTitle.photoSignature.Title}}</h2>
+    </div>
+    <div class="box-body">
+      <form [formGroup]="photoSignature" (ngSubmit)="onSubmit()">
+        <div class='row' style="margin-bottom:10px;">
+          <div class=' col-sm-4 offset-lg-1'>
+            <h5>{{pageTitle.photoSignature.Subtitle1}}</h5>
+            <img [src]="photoUrl" height="100" width="100">
+          </div>
+          <div class='error col-sm-5 mt-5 ml-5' *ngIf="(submitted && errorMessage) || errorMessage">
+            {{errorMessage}}
+          </div>
+        </div>
+        <div class="row offset-lg-1">
+          <input formControlName="photo" type='file' (change)="onSelectPhoto($event)" accept="image/*">
+        </div>
+
+
+        <div class='row' style="margin-bottom:10px;">
+          <div class='col-sm-4 offset-lg-1'>
+            <h5>{{pageTitle.photoSignature.Subtitle2}}</h5>
+            <img [src]="signUrl" height="100" width="100">
+          </div>
+          <div class='error col-sm-5 mt-5 ml-5' *ngIf="(submitted && errorMessage1) || errorMessage1">
+              {{errorMessage1}}
+          </div>
+        </div>
+        <div class="row offset-lg-1">
+            <input formControlName="signature" type='file' (change)="onSelectSign($event)" accept="image/*">
+        </div>
+        <div class="instructions" style= "margin-left:60px;"> 
+            <ul>
+                <p><b>Guidelines for uploading photo signature</b></p>
+              <li class='text-muted'>Size of photograph should be between 40kb - 300kb</li>
+              <li class="text-muted">Size of signature should be between 10kb - 40kb</li>
+            </ul>
+        </div>
+        
+        <div class="row ">
+            <div class="col-md-6 offset-md-1 md-4">
+                <button type="button" class="btn btn-primary btn-lg">Previous</button>
+            </div>
+          <div class="col-md-4 text-right">
+            <button type="submit" class="btn btn-success btn-lg">Next</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
