@@ -14,8 +14,8 @@
               <div class="col-lg-8 ">
                 <input class="form-control" formControlName="applicationID" type='text'>
                 <div class='error col-sm-12 ' style="padding: 0px"
-                  *ngIf=' (login.get("applicationID").invalid && submitted)'>
-                  This field is required
+                  *ngIf=' (login.controls.applicationID.invalid && submitted)'>
+                  {{errors.RequiredField}}
                 </div>
               </div>
             </div>
@@ -28,8 +28,8 @@
               </label>
               <div class="col-lg-8">
                 <input class="form-control" formControlName="password" type='password'>
-                <div class='error col-sm-12' style="padding: 0px" *ngIf='(login.get("password").invalid && submitted)'>
-                  This field is required
+                <div class='error col-sm-12' style="padding: 0px" *ngIf='(login.controls.password.invalid && submitted)'>
+                  {{errors.RequiredField}}
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <button type="submit" class="btn btn-success col-sm-4">Sign In</button>
+              <button type="submit" class="btn btn-success col-sm-2">Sign In</button>
               <a routerLink='/personal-details' class="col-sm-4">Register here</a>
             </div>
           </div>

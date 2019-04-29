@@ -7,9 +7,10 @@ export class HttpService {
     }
 
     postRequest(apiUrl, data) {
-        return this.http.post(apiUrl, data, { headers: {} });
+        return this.http.post(apiUrl, data, {
+            headers: {}
+        });
     }
-
     errorHandler(err) {
         console.log(err);
     }

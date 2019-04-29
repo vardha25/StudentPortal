@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="box">
+    <div class="box-title">
+      <h2>{{pageTitles.registrationForm.Title}}</h2>
+    </div>
+    <div class="box-body">
+      <div style="margin: auto;">
+        <h3>Personal-Details</h3>
+        <div *ngFor='let details of data.personalDetails'>
+            <div class='row'>
+                <div class='col-sm-3 offset-md-4'>{{details.label}}</div>
+                <div>{{details.value}}</div>
+            </div>
+        </div>
+        <h3>{{pageTitles.registrationForm.permanentAddressTitle}}</h3>
+        <div *ngFor='let address of data.permanentAddress'>
+            <div class='row'>
+              <div class='col-sm-3 offset-md-4'>{{address.label}}</div>
+              <div>{{address.value}}</div>
+            </div>
+        </div>
+        <h3>{{pageTitles.registrationForm.currentAddressTitle}}</h3>
+        <div *ngFor='let address of data.currentAddress '>
+            <div class='row'>
+              <div class='col-sm-3 offset-md-4'>{{address.label}}</div>
+              <div >{{address.value}}</div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

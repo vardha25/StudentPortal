@@ -5,6 +5,7 @@ import { PersonalDetailsComponent } from './components/personal-details/personal
 import { AgreementComponent } from './components/agreement/agreement.component';
 import { PhotoSignatureComponent } from './components/photo-signature/photo-signature.component';
 import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'address-details', component: AddressDetailsComponent },
   { path: 'agreement', component: AgreementComponent },
   { path: 'photo-signature', component: PhotoSignatureComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent }
+
 
 ]
 
