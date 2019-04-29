@@ -13,13 +13,15 @@ import { AgreementComponent } from './components/agreement/agreement.component';
 import { RecaptchaModule } from 'ng-recaptcha'
 import { RegistrationService } from './services/registration.service';
 import { PhotoSignatureComponent } from './components/photo-signature/photo-signature.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddressDetailsComponent,
     PersonalDetailsComponent,
     AgreementComponent,
-    PhotoSignatureComponent
+    PhotoSignatureComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

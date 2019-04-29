@@ -18,10 +18,10 @@
                   <label class="col-lg-4">Street/ House No./ Village
                   </label>
                   <div class="col-lg-6">
-                    <input type="text" class="form-control" formControlName="hometown" required />
-                    <div *ngIf="submitted && formControls(i).hometown.invalid">
+                    <input type="text" class="form-control" formControlName="address" required />
+                    <div *ngIf="submitted && formControls(i).address.invalid">
                       <div>
-                        <p *ngIf="formControls(i).hometown.errors.required" class="error">
+                        <p *ngIf="formControls(i).address.errors.required" class="error">
                           {{validationMessages.RequiredField}}</p>
                       </div>
                     </div>

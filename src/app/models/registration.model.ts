@@ -1,12 +1,12 @@
 interface PermanetAddress {
-    homeTown: string;
+    address: string;
     country: string;
     state: string;
     city?: string;
     pincode: string;
 }
 interface CurrentAddress {
-    homeTown: string;
+    address: string;
     country: string;
     state: string;
     city?: string;

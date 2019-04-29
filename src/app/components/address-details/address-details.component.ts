@@ -33,7 +33,7 @@ export class AddressDetailsComponent implements OnInit {
 
     for (let index = 0; index < 2; index++) {
       this.addressForm[index] = this.formBuilder.group({
-        hometown: ['', Validators.required],
+        address: ['', Validators.required],
         country: ['', Validators.required],
         state: ['', Validators.required],
         city: [''],
@@ -57,7 +57,7 @@ export class AddressDetailsComponent implements OnInit {
     for (let index = 0; index < 2; index++) {
 
       let obj = (index === 0) ? data.currentAddress : data.permanentAddress;
-      this.formControls(index).hometown.setValue(obj.hometown);
+      this.formControls(index).address.setValue(obj.address);
       this.formControls(index).country.setValue(obj.country);
       this.formControls(index).state.setValue(obj.state);
       this.formControls(index).city.setValue(obj.city);
@@ -111,7 +111,6 @@ export class AddressDetailsComponent implements OnInit {
   previous() {
     this.registrationService.setCurrentAddressData(this.addressForm[0].value);
     this.registrationService.setPermanentAddressData(this.addressForm[1].value);
-
     this.router.navigate(['personal-details']);
   }
 }
